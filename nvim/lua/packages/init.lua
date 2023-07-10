@@ -88,6 +88,8 @@ return packer.startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'j-hui/fidget.nvim'
 
+    use 'norcalli/nvim-colorizer.lua'
+
     -- Поиск по файлам
     use {
         'nvim-telescope/telescope.nvim',

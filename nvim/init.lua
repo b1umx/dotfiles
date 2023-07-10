@@ -17,5 +17,6 @@ require('packages/telescope-setup')
 require('packages/tasks-setup')
 require('packages/tagbar-setup')
 require('packages/todo-setup')
+require('packages/colorizer-setup')
 require('packages/dap-setup')
 
