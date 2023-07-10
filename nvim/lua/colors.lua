@@ -27,3 +27,7 @@ require('catppuccin').setup({
 })
 vim.cmd.colorscheme 'catppuccin'
 
+local palette = require('catppuccin.palettes.latte')
+vim.api.nvim_set_hl(0, 'SnippetChoiceNode', { fg = palette.lavender })
+vim.api.nvim_set_hl(0, 'SnippetInsertNode', { fg = palette.lavender })
+
