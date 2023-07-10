@@ -3,38 +3,50 @@ local s = luasnip.snippet
 local t = luasnip.text_node
 local i = luasnip.insert_node
 local c = luasnip.choice_node
+local f = luasnip.function_node
+local fmta = require('luasnip.extras.fmt').fmta
 
 local definitions = {
     s({
-        trig = 'hppcls',
+        trig = 'class_hpp',
         dscr = 'C++ header class declaration inside namespace'
-    }, {
-        t({ '#pragma once', '', 'namespace ' }),
-        i(1),
-        t({ ' {', '', '' }),
-        c(2, {
-            t('class '),
-            t('struct ')
-        }),
-        i(3),
-        t({ ' {', '' }),
-        i(0),
-        t({ '', '};', '', '}', '' })
-    }),
+    }, fmta([[
+        #pragma once
+
+        namespace <> {
+
+        <> <3> {
+        public:
+            <3>();<>
+        };
+
+        }
+    ]], {
+        i(1, 'ns'),
+        c(2, { t('class'), t('struct') }),
+        i(3, 'Name'),
+        i(0)
+    }, { repeat_duplicates = true })),
     s({
-        trig = 'cppcls',
+        trig = 'class_cpp',
         dscr = 'C++ source class definition inside namespace'
-    }, {
-        t('#include "'),
-        i(1),
-        t({ '"', '', 'namespace ' }),
-        i(2),
-        t({ ' {', '', '' }),
-        i(3),
-        t('::'),
-        i(0),
-        t({ '', '', '}', '' })
-    })
+    }, fmta([[
+        #include "<>"
+
+        namespace <> {
+
+        <3>::<3>() {<>
+        }
+
+        }
+    ]], {
+        f(function()
+            return vim.fn.fnamemodify(vim.fn.expand('%'), ':t:r') .. '.hpp'
+        end, {}),
+        i(1, 'ns'),
+        i(2, 'Name'),
+        i(0)
+    }, { repeat_duplicates = true }))
 }
 
 return definitions

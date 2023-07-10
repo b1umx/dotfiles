@@ -2,6 +2,7 @@ local luasnip = require('luasnip')
 local types = require('luasnip.util.types')
 
 luasnip.config.setup({
+    update_events = "TextChanged,TextChangedI",
 	region_check_events = "CursorHold,InsertLeave",
 	delete_check_events = "TextChanged,InsertEnter",
     ext_opts = {
