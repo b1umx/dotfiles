@@ -22,6 +22,7 @@ opt.wrap = false
 opt.termguicolors = true
 opt.laststatus = 2
 opt.completeopt = 'menu,menuone,noinsert,noselect'
+opt.pumheight = 14
 opt.shortmess:append 'sI'
 
 opt.expandtab = true

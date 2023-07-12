@@ -1,14 +1,14 @@
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
-local ELLIPSIS_CHAR = '…'
-local MAX_LABEL_WIDTH = 20
-local MIN_LABEL_WIDTH = 20
+local utils = require('packages/cmp-utils')
 
 cmp.setup({
     enabled = true,
     completion = {
-        -- autocomplete = false,
-        completeopt = 'menu,menuone,noinsert,noselect'
+        autocomplete = false,
+        -- completeopt = 'menu,menuone,noinsert,noselect'
+        completeopt = 'menu,menuone,noinsert'
     },
     snippet = {
         expand = function(args)
@@ -16,9 +16,9 @@ cmp.setup({
         end
     },
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip' },
+        { name = 'nvim_lsp' },
     }, {
         { name = 'path' },
         { name = 'buffer' }
@@ -32,71 +32,45 @@ cmp.setup({
         ghost_text = false
     },
     mapping = cmp.mapping({
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<C-e>'] = cmp.mapping.abort(),
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() and cmp.get_selected_entry() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
-            else
-                fallback()
-            end
-        end, { 'i', 's' })
+        ['<C-Space>'] = cmp.mapping(utils.toggle_completion, { 'i', 'c', 's' }),
+        ['<Up>']      = cmp.mapping(utils.select_prev_item, { 'i', 'c', 's' }),
+        ['<Down>']    = cmp.mapping(utils.select_next_item, { 'i', 'c', 's' }),
+        ['<C-n>']     = cmp.mapping(utils.select_next_item_or_snippet_choice, { 'i', 'c', 's' }),
+        ['<C-p>']     = cmp.mapping(utils.select_prev_item_or_snippet_choice, { 'i', 'c', 's' }),
+        ['<Tab>']     = cmp.mapping(utils.confirm_or_snippet_jump, { 'i', 'c', 's' }),
+        ['<S-Tab>']   = cmp.mapping(utils.snippet_jump_reverse, { 'i', 'c', 's' })
     }),
+    -- элемент совпадает только в том случае, если у него совпадает первая буква с первой буквой
+    -- набранного слова
+    matching = {
+        disallow_fuzzy_matching = true,
+        disallow_fullfuzzy_matching = true,
+        disallow_partial_fuzzy_matching = true,
+        disallow_partial_matching = false,
+        disallow_prefix_unmatching = true
+    },
     formatting = {
-        format = function(_, vim_item)
-            local label = vim_item.abbr
-            local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
-            if truncated_label ~= label then
-                vim_item.abbr = truncated_label .. ELLIPSIS_CHAR
-            elseif string.len(label) < MIN_LABEL_WIDTH then
-                local padding = string.rep(' ', MIN_LABEL_WIDTH - string.len(label))
-                vim_item.abbr = label .. padding
-            end
-            return vim_item
-        end
+        fields = {
+            cmp.ItemField.Kind,
+            cmp.ItemField.Abbr,
+            cmp.ItemField.Menu
+        },
+        format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            maxwidth = 50,
+            ellipsis_char = '...',
+            before = utils.format_completion_item
+        })
+    },
+    view = {
+        entries = {
+            name = 'name',
+            selection_order = 'near_cursor'
+        }
     }
 })
 
-local cmd_mapping = {
-    ['<C-Space>'] = {
-        c = cmp.complete()
-    },
-    ['<C-p>'] = {
-        c = function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-            else
-                fallback()
-            end
-        end
-    },
-    ['<C-n>'] = {
-        c = function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            else
-                fallback()
-            end
-        end
-    },
-    ['<Tab>'] = {
-        c = function(fallback)
-            if cmp.visible() and cmp.get_selected_entry() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false })
-            else
-                fallback()
-            end
-        end
-    },
-    ['<C-e>'] = {
-        c = cmp.abort()
-    }
-}
-
 cmp.setup.cmdline(':', {
-    mapping = cmd_mapping,
     sources = cmp.config.sources({
         { name = 'path' },
     }, {
@@ -105,7 +79,6 @@ cmp.setup.cmdline(':', {
 })
 
 cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmd_mapping,
     sources = {
         { name = 'buffer' }
     }
@@ -165,7 +138,8 @@ lspconfig.clangd.setup({
     capabilities = capabilities,
     cmd = {
         'clangd',
-        '--header-insertion=never'
+        '--header-insertion=never',
+        '--completion-style=bundled'
     }
 })
 
