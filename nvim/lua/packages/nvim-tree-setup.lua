@@ -1,20 +1,24 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local api = require('nvim-tree.api')
+
 require('nvim-tree').setup({
     hijack_cursor = true,
     view = {
-        preserve_window_proportions = true
+        centralize_selection = true,
+        preserve_window_proportions = true,
+        width = {
+            min = 30,
+            max = 40
+        }
+    },
+    update_focused_file = {
+        enable = true
     },
     renderer = {
         highlight_opened_files = 'all',
         icons = {
-            -- glyphs = {
-            --     folder = {
-            --         arrow_closed = '',
-            --         arrow_open = ''
-            --     }
-            -- },
             show = {
                 folder_arrow = false
             },
@@ -30,12 +34,20 @@ require('nvim-tree').setup({
     },
     filters = {
         dotfiles = false
-    }
+    },
+    on_attach = function(bufnr)
+        vim.keymap.set('n', '<A-y>', function()
+            local node = api.tree.get_node_under_cursor()
+            if node ~= nil then
+                vim.fn.setreg('', node.absolute_path)
+                vim.fn.setreg('+', node.absolute_path)
+            end
+        end, { buffer = bufnr, noremap = true, silent = true, nowait = true, desc = 'put the node\'s absolute path to the register' })
+    end
 })
 
 local map = vim.api.nvim_set_keymap
-map('n', '<A-b>', ':NvimTreeFocus<CR>', { noremap = true, silent = true })
-map('n', '<A-B>', ':NvimTreeClose<CR>', { noremap = true, silent = true })
+map('n', '<A-b>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 local function open_nvim_tree(data)
     local is_directory = vim.fn.isdirectory(data.file) == 1
