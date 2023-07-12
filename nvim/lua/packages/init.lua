@@ -46,6 +46,7 @@ return packer.startup(function(use)
 
     -- Улучшенная строка статуса
     use 'nvim-lualine/lualine.nvim'
+    use 'arkav/lualine-lsp-progress'
 
     -- Строка с открытыми буферами
     use {

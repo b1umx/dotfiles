@@ -31,3 +31,12 @@ local palette = require('catppuccin.palettes.latte')
 vim.api.nvim_set_hl(0, 'SnippetChoiceNode', { fg = palette.lavender })
 vim.api.nvim_set_hl(0, 'SnippetInsertNode', { fg = palette.lavender })
 
+local Colors = {
+    LspProgressPercentage = palette.sky,
+    LspProgressTitle = palette.text,
+    LspProgressMessage = palette.subtext0,
+    LspProgressSpinner = palette.yellow,
+    LspProgressLspClientName = palette.mauve,
+}
+return Colors
+
