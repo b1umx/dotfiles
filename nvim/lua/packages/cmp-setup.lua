@@ -89,6 +89,7 @@ local on_attach = function(_, bufnr)
     local opts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', '<F12>', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, opts)
@@ -99,8 +100,10 @@ local on_attach = function(_, bufnr)
     end, opts)
     vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, opts)
     vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<S-F12>', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<leader>lf', function() vim.lsp.buf.format { async = true } end, opts)
 end
 
@@ -139,7 +142,8 @@ lspconfig.clangd.setup({
     cmd = {
         'clangd',
         '--header-insertion=never',
-        '--completion-style=bundled'
+        '--completion-style=detailed',
+        '--all-scopes-completion'
     }
 })
 

@@ -32,6 +32,6 @@ require('bufferline').setup({
 })
 
 local map = vim.api.nvim_set_keymap
-map('n', '<A-Left>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
-map('n', '<A-Right>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+map('n', '<A-h>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+map('n', '<A-l>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
 
