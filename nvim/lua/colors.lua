@@ -9,7 +9,26 @@ require('catppuccin').setup({
     styles = {
         conditionals = {},
         keywords = { 'bold' }
-    }
+    },
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        markdown = true,
+        dap = {
+            enabled = true,
+            enable_ui = true
+        },
+        telescope = {
+            enabled = true
+        }
+    },
+    custom_highlights = function(colors)
+        return {
+            DapStopped = { fg = colors.green }
+        }
+    end
 })
 vim.cmd.colorscheme 'catppuccin'
 

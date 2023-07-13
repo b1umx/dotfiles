@@ -19,6 +19,9 @@ return packer.startup(function(use)
     -- Packer
     use 'wbthomason/packer.nvim'
 
+    -- Поддержка для Neovim Lua API
+    use 'folke/neodev.nvim'
+
     -- Цветовые схемы
     use {
         'catppuccin/nvim',
@@ -100,8 +103,19 @@ return packer.startup(function(use)
         }
     }
 
+    -- Улучшенная подсветка синтаксиса
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+            ts_update()
+        end,
+    }
+
     -- Отладка
     use 'mfussenegger/nvim-dap'
+    use 'rcarriga/nvim-dap-ui'
+    use 'mfussenegger/nvim-dap-python'
 
     -- Быстрое комментирование
     use {
