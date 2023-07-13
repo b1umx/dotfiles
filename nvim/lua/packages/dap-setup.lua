@@ -51,6 +51,13 @@ sign('DapBreakpointRejected', { text = '', texthl = 'DapBreakpointRejected', 
 
 local dapui = require('dapui')
 dapui.setup()
-vim.keymap.set('n', '<F9>', function() require('dapui').toggle() end)
+vim.keymap.set('n', '<F9>', function()
+    require('nvim-tree.api').tree.close()
+    require('dapui').open()
+end)
+vim.keymap.set('n', '<F21>', function()
+    require('dapui').close()
+    require('nvim-tree.api').tree.open()
+end)
 
 
