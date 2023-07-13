@@ -27,5 +27,4 @@ vim.keymap.set('n', '<leader>fm', builtin.marks, {})
 vim.keymap.set('n', '<leader>fc', builtin.colorscheme, {})
 vim.keymap.set('n', '<leader>fr', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
-vim.keymap.set('n', '<leader>ft', builtin.treesitter, {})
 
