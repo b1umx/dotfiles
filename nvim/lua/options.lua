@@ -10,9 +10,7 @@ opt.synmaxcol = 240
 
 opt.number = true
 opt.foldenable = false
--- opt.foldmethod = 'indent'
-opt.foldmethod = 'expr'
-opt.foldexpr = 'nvim_treesitter#foldexpr()'
+opt.foldmethod = 'indent'
 opt.splitright = true
 opt.splitbelow = true
 opt.equalalways = false
