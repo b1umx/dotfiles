@@ -22,6 +22,7 @@ opt.laststatus = 2
 opt.completeopt = 'menu,menuone,noinsert,noselect'
 opt.pumheight = 14
 opt.shortmess:append 'sI'
+vim.lsp.set_log_level('off')
 
 opt.expandtab = true
 opt.shiftwidth = 4
