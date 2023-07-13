@@ -46,7 +46,21 @@ local definitions = {
         i(1, 'ns'),
         i(2, 'Name'),
         i(0)
-    }, { repeat_duplicates = true }))
+    }, { repeat_duplicates = true })),
+    s({
+        trig = 'qt_paint_event',
+        dscr = 'Standard minimal paintEvent() realization'
+    }, fmta([[
+        void <>::paintEvent(QPaintEvent *) {
+            QStyleOption opt;
+            opt.init(this);
+            QPainter p(this);
+            style()->>drawPrimitive(QStyle::<>, &opt, &p, this);
+        }
+    ]], {
+        i(1, 'Name'),
+        i(2, 'PE_Frame')
+    }))
 }
 
 return definitions
