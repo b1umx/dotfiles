@@ -39,7 +39,7 @@ return packer.startup(function(use)
     -- Навигация
     use {
         'nvim-tree/nvim-tree.lua',
-        tag = 'nightly'  -- Стабильные изменения для этого проекта
+        tag = 'nightly'  -- В nightly стабильные изменения (для этого проекта)
     }
 
     -- Улучшенная строка статуса
@@ -49,13 +49,14 @@ return packer.startup(function(use)
     -- Строка с открытыми буферами
     use {
         'akinsho/bufferline.nvim',
-        tag = 'v3.*',
+        tag = '*',
         requires = 'nvim-tree/nvim-web-devicons'
     }
 
     -- Скроллбар
     use 'petertriho/nvim-scrollbar'
 
+    -- Навигация по символам
     use 'preservim/tagbar'
 
     -- Маркеры Git
@@ -79,6 +80,7 @@ return packer.startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind.nvim'
 
+    -- Отображение цветов под их определениями
     use 'norcalli/nvim-colorizer.lua'
 
     -- Поиск по файлам
