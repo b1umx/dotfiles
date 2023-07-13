@@ -20,8 +20,6 @@ return packer.startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- Цветовые схемы
-    use 'sainnhe/sonokai'
-    use 'luisiacc/gruvbox-baby'
     use {
         'catppuccin/nvim',
         as = "catppuccin"
