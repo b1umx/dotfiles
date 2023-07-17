@@ -6,8 +6,8 @@ local utils = require('packages/cmp-utils')
 cmp.setup({
     enabled = true,
     completion = {
-        autocomplete = false,
         -- completeopt = 'menu,menuone,noinsert,noselect'
+        autocomplete = false,
         completeopt = 'menu,menuone,noinsert'
     },
     snippet = {
