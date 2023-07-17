@@ -1,2 +1,2 @@
-vim.keymap.set('n', '<F8>', '<Cmd>TagbarToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<F10>', '<Cmd>TagbarToggle<CR>', { noremap = true, silent = true })
 
