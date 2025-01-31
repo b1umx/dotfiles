@@ -1,0 +1,42 @@
+[general]
+import = [
+    # "C:\\Users\\b1umx\\AppData\\Roaming\\alacritty\\themes\\kanagawa_wave.toml"
+    "~/.config/alacritty/themes/kanagawa_wave.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+COLORTERM = "truecolor"
+LANG = "en_US.UTF-8"
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[font.offset]
+y = 1
+
+[cursor.style]
+shape = "Beam"
+blinking = "Never"
+
+[[keyboard.bindings]]
+chars = "\u0000"
+key = "Space"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control|Shift"
+
+[window]
+dynamic_padding = true
+
+[window.dimensions]
+columns = 158
+lines = 38
+
