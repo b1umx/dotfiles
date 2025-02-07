@@ -19,24 +19,39 @@ style = "Regular"
 [font.offset]
 y = 1
 
-[cursor.style]
-shape = "Beam"
-blinking = "Never"
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Control | Shift"
 
 [[keyboard.bindings]]
 chars = "\u0000"
 key = "Space"
 mods = "Control"
 
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "N"
-mods = "Control|Shift"
+[cursor.style]
+blinking = "Off"
+shape = "Beam"
 
 [window]
+# decorations = "None"
 dynamic_padding = true
+# opacity = 0.94
+# startup_mode = "Maximized"
+
+[window.padding]
+x = 0
+y = 0
 
 [window.dimensions]
-columns = 158
-lines = 38
+columns = 100
+lines = 26
 
+#[terminal.shell]
+#program = "wsl"
+# args = [
+#     "-d", "Dev",
+#     "--cd", "~",
+#     "--",
+#     "/bin/zsh", "-l",
+#     "-c", "tmux attach || tmux"
