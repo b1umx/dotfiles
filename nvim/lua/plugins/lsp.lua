@@ -1,7 +1,7 @@
 local on_attach = function(_, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gp', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, opts)
+  vim.keymap.set('n', '<F12>', vim.lsp.buf.definition, opts)
   vim.keymap.set('n', '<leader>hv', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
   vim.keymap.set('n', '<leader>sh', vim.lsp.buf.signature_help, opts)
@@ -23,22 +23,6 @@ return {
     config = function()
       local lspconfig = require('lspconfig')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-      lspconfig.lua_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {
-          Lua = {
-            runtime = { version = 'LuaJIT' },
-            diagnostics = { globals = { 'vim', 'use' }},
-            workspace = {
-                library = vim.api.nvim_get_runtime_file('', true),
-                checkThirdParty = false
-            },
-            telemetry = { enable = false }
-          }
-        }
-      })
 
       local clangd_on_attach = function(client, bufnr)
         on_attach(client, bufnr)

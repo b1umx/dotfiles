@@ -70,14 +70,16 @@ return {
       })
     end,
     opts = {
+      enable_git_status = false,
       window = {
         width = 28
       },
       hijack_netrw_behavior = 'open_default'
     },
     keys = {
-      { '<leader>af', '<cmd>Neotree toggle<cr>', desc = 'Sidebar with filesystem (Root Dir)' },
-      { '<leader>ab', '<cmd>Neotree buffers toggle<cr>', desc = 'Sidebar with openned buffers' }
+      { '<A-f>', '<cmd>Neotree toggle<cr>', desc = 'Sidebar with filesystem (Root Dir)' },
+      { '<A-b>', '<cmd>Neotree buffers toggle<cr>', desc = 'Sidebar with openned buffers' },
+      { '<A-g>', '<cmd>Neotree git_status toggle<cr>', desc = 'Sidebar with openned git status' }
     }
   },
   {

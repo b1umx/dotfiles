@@ -28,6 +28,20 @@ return {
         }
       })
       luasnip.add_snippets('cpp', require('snippets/cpp'))
+
+      local map = vim.keymap.set;
+      map({ 'i' }, '<C-j>', function() luasnip.jump(1) end, { silent = true })
+      map({ 'i' }, '<C-k>', function() luasnip.jump(-1) end, { silent = true })
+      map({ 'i', 's' }, '<C-n>', function()
+        if luasnip.choice_active() then
+          luasnip.change_choice(1)
+        end
+      end, { silent = true })
+      map({ 'i', 's' }, '<C-p>', function()
+        if luasnip.choice_active() then
+          luasnip.change_choice(-1)
+        end
+      end, { silent = true })
     end
   },
   {
@@ -75,7 +89,8 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ['<c-space>'] = cmp.mapping.complete(),
-          ['<cr>'] = cmp.mapping.confirm({ select = true })
+          ['<cr>'] = cmp.mapping.confirm({ select = true }),
+          ['<c-e>'] = cmp.mapping.abort()
         }),
         -- элемент совпадает только в том случае, если у него совпадает
         -- первая буква с первой буквой набранного слова
