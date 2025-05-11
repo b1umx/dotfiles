@@ -31,7 +31,5 @@ require("lazy").setup({
   }
 })
 
-require('kanagawa').load()
-vim.o.background = ''
-
+vim.cmd.colorscheme 'catppuccin'
 

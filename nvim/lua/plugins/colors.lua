@@ -28,6 +28,33 @@ return {
         }
       end
     }
+  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    opts = {
+      flavour = 'mocha',
+      background = {
+        light = 'latte',
+        dark = 'mocha'
+      },
+      styles = {
+        conditionals = {}
+      },
+      -- highlight_overrides = {
+      --   all = function(colors)
+      --     return {
+      --       NeoTreeDirectoryName = { fg = colors.yellow },
+      --       NeoTreeDirectoryIcon = { fg = colors.yellow },
+      --       NeoTreeRootName = { fg = colors.yellow, style = { "bold" } }
+      --     }
+      --   end
+      -- },
+      integrations = {
+        neotree = true
+      }
+    }
   }
 }
 

@@ -139,12 +139,12 @@ return {
     opts = {
       padding = true,
       toggler = {
-        line = '<leader>cc',
-        block = '<leader>cb'
+        line = 'gcc',
+        block = 'gcb'
       },
       opleader = {
-        line = '<leader>c',
-        block = '<leader>b'
+        line = 'gc',
+        block = 'gb'
       }
     }
   },

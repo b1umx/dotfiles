@@ -15,6 +15,7 @@ return {
     opts = function()
       local opts = {
         options = {
+          theme = 'catppuccin',
           globalstatus = true
         },
         sections = {
